@@ -66,6 +66,20 @@ img {
   background-color: var(--color-bg);
   color: var(--color-text);
 }
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: var(--container-pad);
+  z-index: 20;
+}
+.header-logo {
+  width: 160px;
+  height: auto;
+  opacity: 0;
+  transform: translateY(-20px);
+}
 .hero-content {
   max-width: 900px;
   z-index: 10;

@@ -58,7 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. Hero Animations
   function initHeroAnimations() {
     const tl = gsap.timeline();
-    tl.to('.eyebrow', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' })
+    tl.to('.header-logo', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' })
+      .to('.eyebrow', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.8')
       .to('.headline', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.8')
       .to('.hero .btn-primary', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.8');
   }
