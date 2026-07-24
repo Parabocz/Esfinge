@@ -422,3 +422,12 @@ img {
     height: 100px;
   }
 }
+
+@media (max-width: 600px) {
+  .btn-primary {
+    padding: 1rem 1.5rem;
+    font-size: 0.75rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
