@@ -118,10 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Slider Swing Entrance
         if (entry.target.classList.contains('parallax-slider')) {
-          const wrapper = entry.target.querySelector('.swiper-wrapper');
-          gsap.fromTo(wrapper, 
-            { x: 25 }, 
-            { x: 0, duration: 2.5, ease: 'expo.out' }
+          gsap.fromTo(entry.target, 
+            { x: 40, opacity: 0 }, 
+            { x: 0, opacity: 1, duration: 1.2, ease: 'power3.out' }
           );
           observer.unobserve(entry.target);
         }
