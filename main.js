@@ -27,33 +27,33 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   requestAnimationFrame(raf);
 
-  // 2. Preloader with Anime.js (DrawSVG alternative)
+  // 2. Preloader with GSAP (Logo animation)
   const preloader = document.getElementById('preloader');
+  const logo = document.querySelector('.preloader-logo');
   
-  // Set initial stroke-dasharray and dashoffset
-  const paths = document.querySelectorAll('.draw-path');
+  const tl = gsap.timeline();
   
-  anime({
-    targets: '.draw-path',
-    strokeDashoffset: [anime.setDashoffset, 0],
-    easing: 'easeInOutSine',
-    duration: 2000,
-    delay: function(el, i) { return i * 250 },
-    direction: 'alternate',
-    loop: false,
-    complete: function() {
-      // Fade out preloader
-      gsap.to(preloader, {
-        opacity: 0,
-        duration: 1,
-        ease: 'power2.inOut',
-        onComplete: () => {
-          preloader.style.display = 'none';
-          initHeroAnimations();
-        }
-      });
+  tl.to(logo, {
+    opacity: 1,
+    scale: 1,
+    duration: 1.2,
+    ease: 'power3.out'
+  })
+  .to(logo, {
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power2.inOut',
+    delay: 0.5
+  })
+  .to(preloader, {
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power2.inOut',
+    onComplete: () => {
+      preloader.style.display = 'none';
+      initHeroAnimations();
     }
-  });
+  }, '-=0.4');
 
   // 3. Hero Animations
   function initHeroAnimations() {
