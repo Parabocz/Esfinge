@@ -65,6 +65,7 @@ img {
   padding: var(--container-pad);
   color: #fff;
   overflow: hidden;
+  isolation: isolate;
 }
 .hero-video {
   position: absolute;
