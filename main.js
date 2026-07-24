@@ -80,25 +80,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 5. Marquee Infinite Scroll with GSAP
-  const marqueeTrack = document.querySelector('.marquee-track');
-  const marqueeContent = document.querySelector('.marquee-content');
+  // 5. Feature Card and Slider Swing Animations (Intersection Observer)
+  const observerOptions = {
+    threshold: 0.2
+  };
   
-  if (marqueeTrack && marqueeContent) {
-    // Clone the content for seamless loop
-    const clone = marqueeContent.cloneNode(true);
-    marqueeTrack.appendChild(clone);
-
-    // Calculate width of one content block
-    const contentWidth = marqueeContent.offsetWidth;
-
-    gsap.to(marqueeTrack, {
-      x: -contentWidth,
-      ease: 'none',
-      duration: 20, // Adjust speed
-      repeat: -1
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Feature Card Entrance
+        if (entry.target.classList.contains('feature-card')) {
+          gsap.to(entry.target, {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'power3.out'
+          });
+          
+          // Animate numbers
+          const nums = entry.target.querySelectorAll('.stat-num');
+          nums.forEach(num => {
+            const finalVal = parseInt(num.getAttribute('data-val'));
+            anime({
+              targets: num,
+              innerHTML: [0, finalVal],
+              round: 1,
+              easing: 'easeOutExpo',
+              duration: 2000,
+              update: function(a) {
+                num.innerHTML = (finalVal === 30 ? '+' : '') + num.innerHTML;
+              }
+            });
+          });
+          observer.unobserve(entry.target);
+        }
+        
+        // Slider Swing Entrance
+        if (entry.target.classList.contains('parallax-slider')) {
+          const wrapper = entry.target.querySelector('.swiper-wrapper');
+          gsap.fromTo(wrapper, 
+            { x: 50 }, 
+            { x: 0, duration: 1.2, ease: 'elastic.out(1, 0.5)' }
+          );
+          observer.unobserve(entry.target);
+        }
+      }
     });
-  }
+  }, observerOptions);
+
+  const featureCard = document.querySelector('.feature-card');
+  if (featureCard) observer.observe(featureCard);
+  
+  const sliders = document.querySelectorAll('.parallax-slider');
+  sliders.forEach(slider => observer.observe(slider));
 
   // 6. Swiper Parallax Sliders
   const parallaxSliders = document.querySelectorAll('.parallax-slider');
