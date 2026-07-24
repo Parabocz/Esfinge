@@ -120,8 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (entry.target.classList.contains('parallax-slider')) {
           const wrapper = entry.target.querySelector('.swiper-wrapper');
           gsap.fromTo(wrapper, 
-            { x: 35 }, 
-            { x: 0, duration: 1.5, ease: 'power3.out' }
+            { x: 25 }, 
+            { x: 0, duration: 2.5, ease: 'expo.out' }
           );
           observer.unobserve(entry.target);
         }
